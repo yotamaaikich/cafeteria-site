@@ -10,3 +10,6 @@ supabase/.branches/
 Thumbs.db
 .openai/
 README-LOGIN-PRIVATE.md
+docs/TEAM-HANDOFF.md
+docs/VERIFICATION.md
+docs/roles/
