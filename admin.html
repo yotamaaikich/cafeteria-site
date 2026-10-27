@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>食堂管理画面</title>
+<style>
+body{background:#111827;color:white;font-family:sans-serif;padding:20px;max-width:800px;margin:auto}
+.card{background:#1F2937;padding:20px;border-radius:15px;margin-bottom:20px}
+input,textarea,button{box-sizing:border-box;font:inherit}
+input:not([type=checkbox]),textarea{padding:10px;width:100%;margin-top:8px}
+button{padding:12px;margin-top:15px;width:100%;border:none;border-radius:10px;cursor:pointer}
+button:disabled{opacity:.5;cursor:wait}
+label{display:block;margin-top:12px}
+input[type=checkbox]{margin-right:8px}
+video{width:100%;border-radius:10px;margin-top:10px}
+.message{white-space:pre-line;line-height:1.6}
+.note{color:#d1d5db;font-size:.9rem;line-height:1.6}
+[hidden]{display:none!important}
+a{color:#86efac}
+.page-nav{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.page-nav a{padding:10px 16px;border:1px solid #4b5563;border-radius:10px;color:#f3f4f6;text-decoration:none}
+.page-nav a[aria-current=page]{background:#374151;border-color:#86efac}
+.page-nav a:hover{background:#374151}
+</style>
+</head>
+<body>
+<nav class="page-nav" aria-label="画面切り替え">
+    <a href="./">混雑表示</a>
+    <a href="./admin.html" aria-current="page">管理者画面</a>
+</nav>
+<h1>管理者画面</h1>
+<section class="card" id="loginPanel">
+    <h2>管理者ログイン</h2>
+    <form id="loginForm">
+        <label for="loginId">ログインID</label>
+        <input type="text" id="loginId" autocomplete="username" autocapitalize="none" spellcheck="false" value="cafeteria" required>
+        <label for="password">パスワード</label>
+        <input type="password" id="password" autocomplete="current-password" required>
+        <button type="submit" id="loginButton">ログイン</button>
+    </form>
+    <p id="loginResult" class="message" role="status" aria-live="polite"></p>
+</section>
+<section id="adminPanel" hidden>
+    <div class="card">
+        <p id="signedInUser"></p>
+        <button type="button" id="logoutButton">ログアウト</button>
+    </div>
+    <div class="card">
+        <h2>現在人数</h2>
+        <p id="peopleDisplay">未計測</p>
+        <p class="note">人数はカメラで自動計測します。定員は<span id="capacityDisplay">40</span>人です。</p>
+    </div>
+    <div class="card">
+        <h2>AI人数認識</h2>
+        <button type="button" id="cameraButton">カメラで人数を計測</button>
+        <button type="button" id="stopCameraButton" hidden>カメラを停止</button>
+        <video id="video" autoplay playsinline muted></video>
+        <p id="detectedPeople" class="message" role="status">カメラ停止中</p>
+        <p class="note">映像は端末内で処理し、Supabaseには人数のみを送信します。</p>
+        <p class="note">混雑予測には約5分間の計測・保存の履歴が必要です。</p>
+    </div>
+    <div class="card">
+        <h2>販売状況</h2>
+        <label><input type="checkbox" id="curry" checked>カレーライス</label>
+        <label><input type="checkbox" id="ramen" checked>ラーメン</label>
+        <label><input type="checkbox" id="karaage">唐揚げ定食</label>
+        <label><input type="checkbox" id="daily" checked>日替わり定食</label>
+    </div>
+    <div class="card">
+        <h2>お知らせ</h2>
+        <label for="noticeInput">利用者画面に表示する内容</label>
+        <textarea id="noticeInput" rows="5" maxlength="2000"></textarea>
+    </div>
+    <div class="card">
+        <label><input type="checkbox" id="autoSave" checked>カメラ計測中、30秒ごとに自動保存</label>
+        <button type="button" id="saveButton" disabled>Supabaseへ保存</button>
+        <p id="result" class="message" role="status" aria-live="polite"></p>
+    </div>
+</section>
+<script type="module" src="./admin.js"></script>
+</body>
+</html>
