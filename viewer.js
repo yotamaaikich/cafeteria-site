@@ -1,5 +1,5 @@
 import { supabase } from "./supabase.js";
-import { readCafeteria, renderCafeteria, formatPrediction } from "./cafeteria.js";
+import { readCafeteria, renderCafeteria, formatPrediction, formatConnectionStatus } from "./cafeteria.js";
 import { readForecastContext, forecastCrowding, renderForecast } from "./forecast.js";
 
 const connection = document.getElementById("connectionStatus");
@@ -24,7 +24,7 @@ async function loadCafeteriaData() {
         }
         renderCafeteria(document, data);
         renderForecast(document, forecastCrowding(context), formatPrediction);
-        connection.textContent = "🟢 最新データを表示中";
+        connection.textContent = formatConnectionStatus(data.updated_at);
     } catch (error) {
         console.error("混雑状況の取得に失敗しました", error);
         connection.textContent = "接続できません。再接続を試みています";

@@ -1,8 +1,16 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { buildCafeteriaData, readCafeteria, saveCafeteria, renderCafeteria, formatPrediction } from "../cafeteria.js";
+import { buildCafeteriaData, readCafeteria, saveCafeteria, renderCafeteria, formatPrediction, formatConnectionStatus } from "../cafeteria.js";
 
 const menu = { curry: true, ramen: false, karaage: true, daily: false };
+
+test("古い保存データや日時不明のデータを最新の計測として表示しない", () => {
+    const now = Date.parse("2026-10-27T06:00:00Z");
+    assert.match(formatConnectionStatus("2026-10-27T05:59:00Z", now), /最新データ/);
+    assert.match(formatConnectionStatus("2026-10-23T07:16:39Z", now), /更新が止まっています/);
+    assert.match(formatConnectionStatus("invalid", now), /保存済みデータ/);
+    assert.match(formatConnectionStatus("2026-10-27T07:00:00Z", now), /保存済みデータ/);
+});
 
 test("定員40人で混雑度と利用率を計算し、実人数は定員超過でも保持する", () => {
     for (const [people, status, prediction] of [

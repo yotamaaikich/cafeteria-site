@@ -1,11 +1,13 @@
 name: Deploy cafeteria to GitHub Pages
 
-# 全員の担当ファイルを統合してから、Actions画面で手動実行します。
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
+  pages: read
 
 concurrency:
   group: github-pages

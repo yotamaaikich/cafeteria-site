@@ -3,6 +3,14 @@ export { CAPACITY } from "./config.js";
 export const MENU_IDS = ["curry", "ramen", "karaage", "daily"];
 export const DATA_COLUMNS = "id,people,occupancy,status,status_icon,predict10,predict20,notice,curry,ramen,karaage,daily,updated_at,is_measurement";
 
+export function formatConnectionStatus(updatedAt, now = Date.now()) {
+    const updated = Date.parse(updatedAt);
+    if (!Number.isFinite(updated) || updated > now || now - updated > 3 * 60_000) {
+        return "🟡 更新が止まっています（保存済みデータ）";
+    }
+    return "🟢 最新データを表示中";
+}
+
 export function formatPrediction(people) {
     if (people == null) return "データなし";
     const ratio = people / CAPACITY;
