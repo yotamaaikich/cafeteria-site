@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>食堂混雑状況確認サイト</title>
+
+<style>
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:sans-serif;
+}
+
+body{
+    background:#111827;
+    color:white;
+    padding:20px;
+}
+
+.container{
+    max-width:800px;
+    margin:auto;
+}
+
+.header{
+    background:#1F2937;
+    padding:20px;
+    border-radius:20px;
+    text-align:center;
+    margin-bottom:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,.3);
+}
+
+.header h1{
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.live{
+    color:#22C55E;
+    font-weight:bold;
+}
+
+.card{
+    background:#1F2937;
+    padding:20px;
+    border-radius:20px;
+    margin-bottom:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,.3);
+}
+
+.card h2{
+    margin-bottom:15px;
+}
+
+.status{
+    text-align:center;
+}
+
+.status-icon{
+    font-size:80px;
+}
+
+.status-text{
+    font-size:42px;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.occupancy{
+    font-size:22px;
+    margin-top:10px;
+}
+
+.people{
+    color:#d1d5db;
+    margin-top:10px;
+    font-size:18px;
+}
+
+.progress{
+    width:100%;
+    height:18px;
+    background:#374151;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:15px;
+}
+
+.progress-bar{
+    width:46%;
+    height:100%;
+    background:#F59E0B;
+}
+
+.prediction{
+    display:flex;
+    gap:15px;
+}
+
+.prediction-box{
+    flex:1;
+    background:#111827;
+    border-radius:15px;
+    padding:15px;
+    text-align:center;
+}
+
+.prediction-box h3{
+    margin-bottom:10px;
+}
+
+.menu-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 0;
+    border-bottom:1px solid #374151;
+}
+
+.badge{
+    padding:6px 12px;
+    border-radius:20px;
+    color:white;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.badge-green{
+    background:#22C55E;
+}
+
+.badge-red{
+    background:#EF4444;
+}
+
+.notice{
+    background:#111827;
+    border-left:5px solid #F59E0B;
+    padding:15px;
+    border-radius:10px;
+}
+#noticeText{
+    white-space: pre-line;
+}
+
+.notice p{
+    margin:8px 0;
+}
+
+.update{
+    text-align:center;
+    color:#9CA3AF;
+    margin-top:20px;
+}
+
+@media(max-width:600px){
+    .prediction{
+        flex-direction:column;
+    }
+
+    .status-text{
+        font-size:32px;
+    }
+}
+
+.page-nav{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.page-nav a{padding:10px 16px;border:1px solid #4b5563;border-radius:10px;color:#f3f4f6;text-decoration:none}
+.page-nav a[aria-current=page]{background:#374151;border-color:#86efac}
+.page-nav a:hover{background:#374151}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <nav class="page-nav" aria-label="画面切り替え">
+        <a href="./" aria-current="page">混雑表示</a>
+        <a href="./admin.html">管理者画面</a>
+    </nav>
+
+    <div class="header">
+        <h1>食堂混雑状況</h1>
+        <p class="live" id="connectionStatus" role="status" aria-live="polite">接続中...</p>
+    </div>
+
+<div class="card">
+
+    <h2>混雑状況</h2>
+
+    <div class="status">
+
+        <div class="status-icon" id="statusIcon">
+            🟡
+        </div>
+
+        <div class="status-text" id="statusText">
+            読み込み中...
+        </div>
+
+        <div class="occupancy" id="occupancy">
+            利用率 0%
+        </div>
+
+        <div class="people" id="people">
+            現在0人利用中
+        </div>
+
+        <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card">
+
+    <h2>混雑予測</h2>
+    <p id="predictionStatus" class="update" role="status" aria-live="polite">計測履歴を確認中...</p>
+
+    <div class="prediction">
+
+        <div class="prediction-box">
+            <h3 id="predict10Label">10分後</h3>
+            <p id="predict10">
+                読み込み中...
+            </p>
+        </div>
+
+        <div class="prediction-box">
+            <h3 id="predict20Label">20分後</h3>
+            <p id="predict20">
+                読み込み中...
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
+    <div class="card">
+
+        <h2>本日のメニュー</h2>
+
+        <div id="menuContainer">
+
+            <div class="menu-item">
+                <span>カレーライス</span>
+                <span
+                    id="curryStatus"
+                    class="badge badge-green"
+                >
+                    販売中
+                </span>
+            </div>
+
+            <div class="menu-item">
+                <span>ラーメン</span>
+                <span
+                    id="ramenStatus"
+                    class="badge badge-green"
+                >
+                    販売中
+                </span>
+            </div>
+
+            <div class="menu-item">
+                <span>唐揚げ定食</span>
+                <span
+                    id="karaageStatus"
+                    class="badge badge-red"
+                >
+                    売り切れ
+                </span>
+            </div>
+
+            <div class="menu-item">
+                <span>日替わり定食</span>
+                <span
+                    id="dailyStatus"
+                    class="badge badge-green"
+                >
+                    販売中
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+
+        <h2>お知らせ</h2>
+
+        <div class="notice">
+            <p id="noticeText">
+                読み込み中...
+            </p>
+        </div>
+
+    </div>
+
+    <div class="update" id="lastUpdate">
+        最終更新 —
+    </div>
+
+</div>
+
+<script type="module" src="viewer.js"></script>
+</body>
+</html>
