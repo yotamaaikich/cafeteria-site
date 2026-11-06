@@ -27,7 +27,7 @@
             <span class="format">食堂混雑状況確認アプリ</span>
         </header>
         <div class="stage" id="stage">
-            <section class="scene" data-seconds="11" aria-labelledby="scene-1">
+            <section class="scene" data-seconds="5.5" aria-labelledby="scene-1">
                 <div class="story">
                     <p class="chapter"><span>01</span> はじまり</p>
                     <h1 id="scene-1">食堂、いま<br><em>混んでる？</em></h1>
@@ -49,17 +49,17 @@
                             <text x="84" y="55" class="svg-label">食堂</text>
                         </g>
                         <g class="queue" transform="translate(349 27)">
-                            <use href="#person" x="0" width="21" height="33" class="gold pop" style="--delay:1.5s"/>
-                            <use href="#person" x="32" width="21" height="33" class="gold pop" style="--delay:2.1s"/>
-                            <use href="#person" x="64" width="21" height="33" class="gold pop" style="--delay:2.7s"/>
-                            <use href="#person" x="96" width="21" height="33" class="gold pop" style="--delay:3.3s"/>
+                            <use href="#person" x="0" width="21" height="33" class="gold pop" style="--delay:0.75s"/>
+                            <use href="#person" x="32" width="21" height="33" class="gold pop" style="--delay:1.05s"/>
+                            <use href="#person" x="64" width="21" height="33" class="gold pop" style="--delay:1.35s"/>
+                            <use href="#person" x="96" width="21" height="33" class="gold pop" style="--delay:1.65s"/>
                         </g>
-                        <circle class="route-dot" r="7" fill="#70f3bf"><animateMotion class="walker" dur="3s" begin="indefinite" fill="freeze" path="M115 183 C183 183 163 245 252 245 S326 183 405 183"/></circle>
+                        <circle class="route-dot" r="7" fill="#70f3bf"><animateMotion class="walker" dur="1.5s" begin="indefinite" fill="freeze" path="M115 183 C183 183 163 245 252 245 S326 183 405 183"/></circle>
                     </svg>
                     <p class="visual-caption">混雑が、着く前に分かったら。</p>
                 </div>
             </section>
-            <section class="scene" data-seconds="12" aria-labelledby="scene-2" hidden>
+            <section class="scene" data-seconds="6" aria-labelledby="scene-2" hidden>
                 <div class="story">
                     <p class="chapter"><span>02</span> 混雑の見える化</p>
                     <h2 id="scene-2">人数を、ひと目で<br><em>分かる混雑度に。</em></h2>
@@ -75,7 +75,7 @@
                     <div class="legend"><span><i class="dot good"></i>空いている</span><span><i class="dot normal"></i>普通</span><span><i class="dot busy"></i>混雑</span></div>
                 </div>
             </section>
-            <section class="scene" data-seconds="15" aria-labelledby="scene-3" hidden>
+            <section class="scene" data-seconds="7.5" aria-labelledby="scene-3" hidden>
                 <div class="story">
                     <p class="chapter"><span>03</span> AIで人数を数える</p>
                     <h2 id="scene-3">映像は端末の中。<br><em>送るのは人数。</em></h2>
@@ -89,15 +89,15 @@
                         <use href="#person" x="119" y="102" width="55" height="85" class="silhouette"/>
                         <use href="#person" x="232" y="86" width="59" height="92" class="silhouette"/>
                         <use href="#person" x="349" y="111" width="50" height="78" class="silhouette"/>
-                        <g class="detect" style="--delay:1.5s"><rect x="108" y="90" width="78" height="108" rx="6"/><text x="113" y="84">人物 1</text></g>
-                        <g class="detect" style="--delay:2.5s"><rect x="220" y="74" width="83" height="115" rx="6"/><text x="225" y="68">人物 2</text></g>
-                        <g class="detect" style="--delay:3.5s"><rect x="337" y="99" width="75" height="102" rx="6"/><text x="342" y="93">人物 3</text></g>
+                        <g class="detect" style="--delay:0.75s"><rect x="108" y="90" width="78" height="108" rx="6"/><text x="113" y="84">人物 1</text></g>
+                        <g class="detect" style="--delay:1.25s"><rect x="220" y="74" width="83" height="115" rx="6"/><text x="225" y="68">人物 2</text></g>
+                        <g class="detect" style="--delay:1.75s"><rect x="337" y="99" width="75" height="102" rx="6"/><text x="342" y="93">人物 3</text></g>
                         <path class="scanline" d="M47 65h426"/>
                     </svg>
                     <div class="flow" aria-hidden="true"><span>端末内で検出</span><span class="flow-arrow">→</span><strong>3人</strong><span class="flow-arrow">→</span><span>人数を保存</span></div>
                 </div>
             </section>
-            <section class="scene" data-seconds="16" aria-labelledby="scene-4" hidden>
+            <section class="scene" data-seconds="8" aria-labelledby="scene-4" hidden>
                 <div class="story">
                     <p class="chapter"><span>04</span> 混雑予測</p>
                     <h2 id="scene-4">いまの先を、<br><em>計測の履歴から。</em></h2>
@@ -112,9 +112,9 @@
                         <path d="M205 48V215" class="forecast-divider"/>
                         <path class="history-line" pathLength="1" d="M50 199 98 191 142 194 205 177"/>
                         <path class="future-line" pathLength="1" d="M205 177Q260 164 323 152T449 113"/>
-                        <g class="pop" style="--delay:1s"><circle cx="205" cy="177" r="6" fill="#70f3bf"/><text x="205" y="154" text-anchor="middle" class="svg-value">8人</text></g>
-                        <g class="pop" style="--delay:3s"><circle cx="323" cy="152" r="6" fill="#ffd889"/><text x="323" y="129" text-anchor="middle" class="svg-value">12人</text></g>
-                        <g class="pop" style="--delay:4s"><circle cx="449" cy="113" r="6" fill="#ffd889"/><text x="449" y="90" text-anchor="middle" class="svg-value">18人</text></g>
+                        <g class="pop" style="--delay:0.5s"><circle cx="205" cy="177" r="6" fill="#70f3bf"/><text x="205" y="154" text-anchor="middle" class="svg-value">8人</text></g>
+                        <g class="pop" style="--delay:1.5s"><circle cx="323" cy="152" r="6" fill="#ffd889"/><text x="323" y="129" text-anchor="middle" class="svg-value">12人</text></g>
+                        <g class="pop" style="--delay:2s"><circle cx="449" cy="113" r="6" fill="#ffd889"/><text x="449" y="90" text-anchor="middle" class="svg-value">18人</text></g>
                         <text x="79" y="250" text-anchor="middle" class="svg-minor">直近の履歴</text>
                         <text x="205" y="250" text-anchor="middle" class="svg-minor">いま</text>
                         <text x="323" y="250" text-anchor="middle" class="svg-minor">10分後</text>
@@ -123,7 +123,7 @@
                     <p class="visual-caption">履歴が足りないときは予測を出しません。</p>
                 </div>
             </section>
-            <section class="scene" data-seconds="14" aria-labelledby="scene-5" hidden>
+            <section class="scene" data-seconds="7" aria-labelledby="scene-5" hidden>
                 <div class="story">
                     <p class="chapter"><span>05</span> 食堂からのお知らせ</p>
                     <h2 id="scene-5">混雑だけじゃない。<br><em>メニューも分かる。</em></h2>
@@ -133,14 +133,14 @@
                     <span class="figure-label">画面イメージ｜内容は表示例</span>
                     <div class="menu-demo">
                         <p class="menu-title">本日のメニュー</p>
-                        <div class="menu-row pop" style="--delay:.7s"><span>カレーライス</span><span class="pill good">販売中</span></div>
-                        <div class="menu-row pop" style="--delay:1.4s"><span>ラーメン</span><span class="pill busy">売り切れ</span></div>
-                        <div class="menu-row pop" style="--delay:2.1s"><span>日替わり定食</span><span class="pill good">販売中</span></div>
-                        <div class="notice-demo pop" style="--delay:3.1s"><b>お知らせ</b><span>本日の営業は14時までです。</span></div>
+                        <div class="menu-row pop" style="--delay:0.35s"><span>カレーライス</span><span class="pill good">販売中</span></div>
+                        <div class="menu-row pop" style="--delay:0.7s"><span>ラーメン</span><span class="pill busy">売り切れ</span></div>
+                        <div class="menu-row pop" style="--delay:1.05s"><span>日替わり定食</span><span class="pill good">販売中</span></div>
+                        <div class="notice-demo pop" style="--delay:1.55s"><b>お知らせ</b><span>本日の営業は14時までです。</span></div>
                     </div>
                 </div>
             </section>
-            <section class="scene" data-seconds="10" aria-labelledby="scene-6" hidden>
+            <section class="scene" data-seconds="5" aria-labelledby="scene-6" hidden>
                 <div class="story">
                     <p class="chapter"><span>06</span> 公開デモへ</p>
                     <h2 id="scene-6">では、実際の<br><em>画面をどうぞ。</em></h2>
@@ -157,7 +157,7 @@
         <footer class="player">
             <div class="timeline" id="timeline" aria-label="紹介の場面を選ぶ" hidden></div>
             <div class="controls">
-                <span class="time" id="time">全6場面・約1分18秒</span>
+                <span class="time" id="time">全6場面・約39秒</span>
                 <button class="pause" id="pause" type="button" hidden>一時停止</button>
                 <a class="skip" href="./">混雑表示へ <span aria-hidden="true">↗</span></a>
             </div>
