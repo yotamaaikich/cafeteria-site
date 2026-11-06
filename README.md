@@ -10,6 +10,9 @@
 
 - [混雑表示画面](https://yotamaaikich.github.io/cafeteria-site/)
 - [管理者画面](https://yotamaaikich.github.io/cafeteria-site/admin.html)
+- [高専祭の展示アニメーション](https://yotamaaikich.github.io/cafeteria-site/intro.html) · [掲示用QRコード](https://yotamaaikich.github.io/cafeteria-site/festival-qr.svg)
+
+展示アニメーションは約1分18秒で、終了すると混雑表示画面に切り替わります。
 
 ## 主な機能
 
